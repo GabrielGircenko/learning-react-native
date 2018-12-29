@@ -7,52 +7,41 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, TextInput, Text, View} from 'react-native';
+import {StyleSheet, Button, TextInput, Text, View} from 'react-native';
 
 export default class App extends Component {
 
   constructor() {
     super()
-    this.state = {
-      username: "defUsername",
-      password: ""
-    }
-    this.handleUsernameText=this.handleUsernameText.bind(this)
-    this.handlePasswordText=this.handlePasswordText.bind(this)
+    this.buttonPressed = this.buttonPressed.bind(this)
   }
 
-  handleUsernameText(newText) {
-    console.log("Username: " + newText)
-    this.setState({
-      username: newText
-    })
-  }
+  buttonPressed() {
+    const username = this._username._lastNativeText
+    const password = this._password._lastNativeText
 
-  handlePasswordText(newText) {
-    console.log(`Password: ${newText}`)
-    this.setState({
-      password: newText
-    })
+    console.log(username, password)
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Text>Username</Text>
+
         <TextInput 
           underlineColorAndroid="red"
-          defaultValue={this.state.username}
-          onChangeText={this.handleUsernameText}
+          ref={input => this._username = input}
         />
+
         <Text>Password</Text>
+
         <TextInput 
-          secureTextEntry={true}
           underlineColorAndroid="red"
-          defaultValue={this.state.password}
-          onChangeText={this.handlePasswordText}
+          ref={input => this._password = input}
         />
-        <Text>This is the username: {this.state.username}</Text>
-        <Text>This is the password: {this.state.password}</Text>
+
+        <Button title={"Hello"} onPress={this.buttonPressed} />
+
       </View>
     );
   }
