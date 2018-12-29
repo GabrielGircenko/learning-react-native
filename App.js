@@ -13,14 +13,12 @@ export default class App extends Component {
 
   constructor() {
     super()
+    this.state = {}
     this.buttonPressed = this.buttonPressed.bind(this)
   }
 
   buttonPressed() {
-    const username = this._username._lastNativeText
-    const password = this._password._lastNativeText
-
-    console.log(username, password)
+    console.log(this.state.username, this.state.password)
   }
 
   render() {
@@ -30,14 +28,16 @@ export default class App extends Component {
 
         <TextInput 
           underlineColorAndroid="red"
-          ref={input => this._username = input}
+          defaultValue={this.state.username}
+          onChangeText={text => this.setState({username: text})}
         />
 
         <Text>Password</Text>
 
         <TextInput 
           underlineColorAndroid="red"
-          ref={input => this._password = input}
+          defaultValue={this.state.password}
+          onChangeText={text => this.setState({password: text})}
         />
 
         <Button title={"Hello"} onPress={this.buttonPressed} />
